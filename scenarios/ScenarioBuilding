@@ -1,0 +1,368 @@
+library(openxlsx)
+
+
+###########################
+### DEFINICIÓ ESCENARIS ###
+###########################
+
+setwd("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Simulation Model")
+
+
+#E0: No hi ha mort per Cydalima ni canvi climàtic
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-100 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cydsever.min_pest<-0.3
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE0.Rdata")
+#load("scenario/scnE0.Rdata")
+
+
+#E1: El boix mor després de 10 anys seguit de cydalima i regenera amb sols 5 anys i això passa només quan són atacs severs de Cydalima i no hi ha C.C.
+TSD_reg<-5 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-10 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cydsever.min_pest<-0.3
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE1.Rdata")
+#load("scenario/scnE1.Rdata")
+
+
+#E2: El boix mor després de 5 anys seguit de cydalima i regenera amb sols 10 anys i això passa només quan són atacs severs de Cydalima i no hi ha C.C.
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cydsever.min_pest<-0.3
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE2.Rdata")
+#load("scenario/scnE2.Rdata")
+
+
+#E3: El boix mor després de 5 anys seguit de cydalima i regenera amb sols 10 anys i això passa amb tots de Cydalima i no hi ha C.C.
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cydsever.min_pest<-0
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE3.Rdata")
+#load("scenario/scnE3.Rdata")
+
+
+#E4: El boix mor després de 10 anys seguit de cydalima i regenera amb sols 5 anys i això passa només quan són atacs severs de Cydalima i hi ha C.C. 
+TSD_reg<-5 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-10 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cydsever.min_pest<-0.3
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE4.Rdata")
+#load("scenario/scnE4.Rdata")
+
+
+#E5: El boix mor després de 5 anys seguit de cydalima i regenera amb sols 10 anys i això passa només quan són atacs severs de Cydalima i hi ha C.C.
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cydsever.min_pest<-0.3
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE5.Rdata")
+#load("scenario/scnE5.Rdata")
+
+
+#E6: El boix mor després de 5 anys seguit de cydalima i regenera amb sols 10 anys i això passa amb tots de Cydalima i hi ha C.C.
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cydsever.min_pest<-0
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE6.Rdata")
+#load("scenario/scnE6.Rdata")
+
+
+
+
+
+
+##############
+###Prova 2
+#E1: El boix mor després de 5 anys seguit de cydalima, no hi ha C.C. i els th són laxes (poc efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.10
+SDM.cydsever.min_pest<-0.20
+SDM.boix.min_seq<-0.10
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE1.Rdata")
+#load("scenario/scnE1.Rdata")
+
+
+#E2: El boix mor després de 5 anys seguit de cydalima, no hi ha C.C. i els th són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.30
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE2.Rdata")
+#load("scenario/scnE2.Rdata")
+
+
+#E3: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C. i els th són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.30
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE3.Rdata")
+#load("scenario/scnE3.Rdata")
+
+
+#E4: El boix mor després de 10 anys seguit de cydalima, no hi ha C.C. i els th són laxes (poc efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-10 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.10
+SDM.cydsever.min_pest<-0.20
+SDM.boix.min_seq<-0.10
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE4.Rdata")
+#load("scenario/scnE4.Rdata")
+
+
+#E5: El boix mor després de 10 anys seguit de cydalima, no hi ha C.C. i els th són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-10 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.30
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri_bau.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE5.Rdata")
+#load("scenario/scnE5.Rdata")
+
+
+#E6: El boix mor després de 10 anys seguit de cydalima, sí hi ha C.C. i els th són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-10 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.30
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE6.Rdata")
+#load("scenario/scnE6.Rdata")
+
+
+#E7: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C. i els th de Cyd són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.10
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE7.Rdata")
+#load("scenario/scnE7.Rdata")
+
+
+#E8: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C. i els th de boix/sequera són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.10
+SDM.cydsever.min_pest<-0.20
+SDM.boix.min_seq<-0.30
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri.xlsx")
+dist.seq.total<-read.xlsx("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima Model Simulació/Sequera/DistSeq_Piri.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE8.Rdata")
+#load("scenario/scnE8.Rdata")
+
+
+
+
+
+#E20: El boix mor després de 5 anys seguit de cydalima, no hi ha C.C. i els th són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE20.Rdata")
+#load("scenario/scnE20.Rdata")
+
+
+#E21: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp85 i els th són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_85.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_85.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE21.Rdata")
+#load("scenario/scnE21.Rdata")
+
+
+#E22: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp45 i els th són estrictes (molt efecte climàtic)
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_45.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_45.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE22.Rdata")
+#load("scenario/scnE22.Rdata")
+
+
+#E23: El boix mor després de 5 anys seguit de cydalima, no hi ha C.C. i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.59 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_BAU.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_bau.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE23.Rdata")
+#load("scenario/scnE23.Rdata")
+
+
+#E24: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp85 i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.59 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_85.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_85.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE24.Rdata")
+#load("scenario/scnE24.Rdata")
+
+
+#E25: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp45 i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-5 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.59 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_45.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_45.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE25.Rdata")
+#load("scenario/scnE25.Rdata")
+
+
+#E26: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp45 i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-10 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_45.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_45.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE26.Rdata")
+#load("scenario/scnE26.Rdata")
+
+
+#E27: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp45 i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-10 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-10 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_45.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_85.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE27.Rdata")
+#load("scenario/scnE27.Rdata")
+
+
+#E28: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp45 i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-2 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-2 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_45.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_45.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE28.Rdata")
+#load("scenario/scnE28.Rdata")
+
+
+#E29: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp45 i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-2 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-2 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_45.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_85.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE29.Rdata")
+#load("scenario/scnE29.Rdata")
+
+
+#E30: El boix mor després de 5 anys seguit de cydalima, sí hi ha C.C.rcp45 i els th són estrictes (molt efecte climàtic) i no hi ha interaccio
+TSD_reg<-2 #anys sense foc o Cyd perquè hi pugui haver regeneració del boix.
+Inc_Cyd<-2 #anys seguits de Cyd perquè hi hagi Boix -> NoBoix.
+SDM.cyd.min_spread<-0.30
+SDM.cydsever.min_pest<-0.40
+SDM.boix.min_seq<-0.58
+SDM.boix.min_reg<-0.80 #no pot ser <= que SDM.boix.min_seq
+dist.foc.total<-read.xlsx("inputfiles/DistFoc_anual_Piri_45.xlsx")
+FixIn.df<-read.delim("inputfiles/FixIn_df_BAU.txt",sep=" ")
+
+save(list = ls(.GlobalEnv), file = "scenario/scnE30.Rdata")
+#load("scenario/scnE30.Rdata")
+
