@@ -1,0 +1,223 @@
+
+library(raster)
+
+
+###########################################
+### Unificar condicions dels inputs Piri ###
+###########################################
+
+#Capa de referència
+limit <- raster("Input data/InLaPiri1000.tif")
+
+#Capes a convertir
+InLa<-raster("Input data/InLaPiri1000.tif")
+
+SDMBoix<-raster("Buxus/SDM Buxus/GBIF/SDM_buxus.tif")
+SDMBoix_85_204160<-raster("Buxus/SDM Buxus/GBIF/SDM_rcp85_2041-60.tif")
+crs(SDMBoix_85_204160) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMBoix_85_206180<-raster("Buxus/SDM Buxus/GBIF/SDM_rcp85_2061-80.tif")
+crs(SDMBoix_85_206180) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMboix_DifAnual_85_20202050<-raster("Buxus/SDM Buxus/GBIF/SDMboix_DifAnual_20202050_rcp85.tif")
+crs(SDMboix_DifAnual_85_20202050) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMboix_DifAnual_85_20502070<-raster("Buxus/SDM Buxus/GBIF/SDMboix_DifAnual_20502070_rcp85.tif")
+crs(SDMboix_DifAnual_85_20502070) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMBoix_45_204160<-raster("Buxus/SDM Buxus/GBIF/SDM_rcp45_2041-60.tif")
+crs(SDMBoix_45_204160) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMBoix_45_206180<-raster("Buxus/SDM Buxus/GBIF/SDM_rcp45_2061-80.tif")
+crs(SDMBoix_45_206180) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMboix_DifAnual_45_20202050<-raster("Buxus/SDM Buxus/GBIF/SDMboix_DifAnual_20202050_rcp45.tif")
+crs(SDMboix_DifAnual_45_20202050) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMboix_DifAnual_45_20502070<-raster("Buxus/SDM Buxus/GBIF/SDMboix_DifAnual_20502070_rcp45.tif")
+crs(SDMboix_DifAnual_45_20502070) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+
+
+SDMCyd<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted.tif")
+SDMCyd_85_204160<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted_85_2041-60.tif")
+crs(SDMCyd_85_204160) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMCyd_85_206180<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted_85_2061-80.tif")
+crs(SDMCyd_85_206180) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMcyd_DifAnual_85_20202050<-raster("Input data/SDMcyd_DifAnual_20202050_rcp85.tif")
+crs(SDMcyd_DifAnual_85_20202050) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMcyd_DifAnual_85_20502070<-raster("Input data/SDMcyd_DifAnual_20502070_rcp85.tif")
+crs(SDMcyd_DifAnual_85_20502070) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMCyd_45_204160<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted_45_2041-60.tif")
+crs(SDMCyd_45_204160) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMCyd_45_206180<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted_45_2061-80.tif")
+crs(SDMCyd_45_206180) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMcyd_DifAnual_45_20202050<-raster("Input data/SDMcyd_DifAnual_20202050_rcp45.tif")
+crs(SDMcyd_DifAnual_45_20202050) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMcyd_DifAnual_45_20502070<-raster("Input data/SDMcyd_DifAnual_20502070_rcp45.tif")
+crs(SDMcyd_DifAnual_45_20502070) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+
+
+FocRisc<-raster("Foc/RiscFocCREAF_piri_1000.tif")
+
+CydPiri2018<-raster("Input data/CydPiri2018_1000.tif") #Segons alta afectció o no.
+#CydPiri2018<-raster("Input data/CydPiri2018_high_1000.tif")
+CydPiri2019<-raster("Input data/CydPiri2019_1000.tif") #Segons alta afectció o no.
+#CydPiri2019<-raster("Input data/CydPiri2019_high_1000.tif")
+
+
+#Conversio
+llista<-list(InLa,SDMBoix,SDMboix_DifAnual_85_20202050,SDMboix_DifAnual_85_20502070,SDMBoix_85_204160,SDMBoix_85_206180,SDMboix_DifAnual_45_20202050,SDMboix_DifAnual_45_20502070,SDMBoix_45_204160,SDMBoix_45_206180,
+             SDMCyd,SDMcyd_DifAnual_85_20202050,SDMcyd_DifAnual_85_20502070,SDMCyd_85_204160,SDMCyd_85_206180,SDMcyd_DifAnual_45_20202050,SDMcyd_DifAnual_45_20502070,SDMCyd_45_204160,SDMCyd_45_206180,
+             FocRisc,CydPiri2018,CydPiri2019)
+noms<-c("InLa","SDMBoix","SDMBoix_DifAnual_85_20202050","SDMBoix_DifAnual_85_20502070","SDMBoix_85_204160","SDMBoix_85_206180","SDMboix_DifAnual_45_20202050","SDMboix_DifAnual_45_20502070","SDMBoix_45_204160","SDMBoix_45_206180",
+        "SDMCyd","SDMCyd_DifAnual_85_20202050","SDMCyd_DifAnual_85_20502070","SDMCyd_85_204160","SDMCyd_85_206180","SDMcyd_DifAnual_45_20202050","SDMcyd_DifAnual_45_20502070","SDMCyd_45_204160","SDMCyd_45_206180",
+        "FocRisc","CydPiri2018","CydPiri2019")
+
+llista.out<-list()
+
+for (i in 1:length(noms)){
+  a<-llista[[i]]
+  b<-projectRaster(a,limit)
+  c<-mask(b,limit)
+  
+  plot(c,main=noms[i])
+  
+  llista.out[[i]]<-c
+  writeRaster(c,paste0("Simulation Model/inputfiles/",noms[i],".tif"),format="GTiff", overwrite=TRUE)
+}
+
+
+#Convertir a data frames
+data1<-na.omit(as.data.frame(limit,xy=T))
+data2<-cbind(data1,extract(limit,data1[,c(1,2)],cellnumbers=T))
+data2<-data2[,c(4,1,2)]
+
+Habitat.df<-cbind(data2,extract(llista.out[[1]],data2[,c(2,3)]))
+Habitat.df[is.na(Habitat.df)] <- 0
+colnames(Habitat.df)[4]<-"Hab2019"
+write.table(Habitat.df,"Simulation Model/inputfiles/Habitat_df.txt")
+
+LocCyd.df<-cbind(data2,extract(stack(llista.out[13:14]),data2[,c(2,3)]))
+LocCyd.df[is.na(LocCyd.df)] <- 0
+LocCyd.df[,c(4)]<-ifelse(LocCyd.df[,c(4)]>0,1,0)
+LocCyd.df[,c(5)]<-ifelse(LocCyd.df[,c(5)]>0,1,0)
+LocCyd.df$kk<-0
+LocCyd.df<-LocCyd.df[,c(1,2,3,6,6,6,6,6,6,6,6,4,5)]
+colnames(LocCyd.df)[4:13]<-c("Cyd2010","Cyd2011","Cyd2012","Cyd2013","Cyd2014","Cyd2015","Cyd2016","Cyd2017","Cyd2018","Cyd2019")
+write.table(LocCyd.df,"Simulation Model/inputfiles/LocCyd_df.txt")
+
+LocCydSev.df<-cbind(data2,extract(stack(llista.out[13:14]),data2[,c(2,3)]))
+LocCydSev.df[is.na(LocCydSev.df)] <- 0
+LocCydSev.df[,c(4)]<-ifelse(LocCydSev.df[,c(4)]>0,1,0)
+LocCydSev.df[,c(5)]<-ifelse(LocCydSev.df[,c(5)]>0,1,0)
+LocCydSev.df$kk<-0
+LocCydSev.df<-LocCydSev.df[,c(1,2,3,6,6,6,6,6,6,6,6,4,5)]
+colnames(LocCydSev.df)[4:13]<-c("Cyd2010","Cyd2011","Cyd2012","Cyd2013","Cyd2014","Cyd2015","Cyd2016","Cyd2017","Cyd2018","Cyd2019")
+write.table(LocCydSev.df,"Simulation Model/inputfiles/LocCydSev_df.txt")
+
+FixInp.df<-cbind(data2,extract(stack(llista.out[2:20]),data2[,c(2,3)]))
+FixInp.df[is.na(FixInp.df)] <- 0
+colnames(FixInp.df)[4:22]<-c("SDMbuxus_2020","SDMboix_DifAnual_85_20202050","SDMboix_DifAnual_85_20502070","SDMbuxus_85_204160","SDMbuxus_85_206180","SDMbuxus_DifAnual_45_20202050","SDMbuxus_DifAnual_45_20502070","SDMbuxus_45_204160","SDMbuxus_45_206180",
+                             "SDMcyd_2020","SDMcyd_DifAnual_85_20202050","SDMcyd_DifAnual_85_20502070","SDMcyd_85_204160","SDMcyd_85_206180","SDMcyd_DifAnual_45_20202050","SDMcyd_DifAnual_45_20502070","SDMcyd_45_204160","SDMcyd_45_206180",
+                             "RiscFoc")
+write.table(FixInp.df,"Simulation Model/inputfiles/FixIn_df.txt")
+
+
+FixIn_df_85<-FixInp.df[,c(1:8,13:17,22)]
+colnames(FixIn_df_85)<-c("cells","x","y","SDMbuxus_2020","SDMboix_DifAnual_20202050","SDMboix_DifAnual_20502070","SDMbuxus_204160","SDMbuxus_206180",       
+                          "SDMcyd_2020","SDMcyd_DifAnual_20202050","SDMcyd_DifAnual_20502070","SDMcyd_204160","SDMcyd_206180","RiscFoc")  
+write.table(FixIn_df_85,"Simulation Model/inputfiles/FixIn_df_85.txt")
+
+
+FixIn_df_45<-FixInp.df[,c(1:4,9:13,18:22)]
+colnames(FixIn_df_45)<-c("cells","x","y","SDMbuxus_2020","SDMboix_DifAnual_20202050","SDMboix_DifAnual_20502070","SDMbuxus_204160","SDMbuxus_206180",       
+                         "SDMcyd_2020","SDMcyd_DifAnual_20202050","SDMcyd_DifAnual_20502070","SDMcyd_204160","SDMcyd_206180","RiscFoc")  
+write.table(FixIn_df_45,"Simulation Model/inputfiles/FixIn_df_45.txt")
+
+
+FixInp.df$zero<-0
+FixIn_df_BAU<-FixInp.df[,c(1:4,23,23,4,4,13,23,23,13,13,22)]
+colnames(FixIn_df_BAU)<-c("cells","x","y","SDMbuxus_2020","SDMboix_DifAnual_20202050","SDMboix_DifAnual_20502070","SDMbuxus_204160","SDMbuxus_206180",       
+                          "SDMcyd_2020","SDMcyd_DifAnual_20202050","SDMcyd_DifAnual_20502070","SDMcyd_204160","SDMcyd_206180","RiscFoc")  
+write.table(FixIn_df_BAU,"Simulation Model/inputfiles/FixIn_df_BAU.txt")
+
+
+
+
+
+###########################################
+### Unificar condicions dels inputs CAT ###
+###########################################
+
+#Capa de referència
+aspect <- raster("C:/Users/quim.canelles/Documents/Dades/Topografia/Aspect/Aspect_100m_31N-ETRS89.asc")
+crs(aspect) <- CRS("+init=epsg:25831")
+aspect<-aggregate(aspect,10)
+
+#Capes a convertir
+InLa<-raster("Input data/InLa1000.tif")
+crs(InLa) <- CRS("+init=epsg:25831")
+
+SDMBoix<-raster("Buxus/SDM Buxus/GBIF/SDM_buxus.tif")
+SDMBoix_85_204160<-raster("Buxus/SDM Buxus/GBIF/SDM_rcp85_2041-60.tif")
+crs(SDMBoix_85_204160) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMBoix_85_206180<-raster("Buxus/SDM Buxus/GBIF/SDM_rcp85_2061-80.tif")
+crs(SDMBoix_85_206180) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMboix_DifAnual_20202050<-raster("Buxus/SDM Buxus/GBIF/SDMboix_DifAnual_20202050_rcp85.tif")
+crs(SDMboix_DifAnual_20202050) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMboix_DifAnual_20502070<-raster("Buxus/SDM Buxus/GBIF/SDMboix_DifAnual_20502070_rcp85.tif")
+crs(SDMboix_DifAnual_20502070) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+
+SDMCyd<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted.tif")
+SDMCyd_85_204160<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted_85_2041-60.tif")
+crs(SDMCyd_85_204160) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMCyd_85_206180<-raster("C:/Users/quim.canelles/OneDrive - ctfc.cat/Cydalima/SDM Cydalima/Model GLM/random i Wan14/EuropaWeighted_85_2061-80.tif")
+crs(SDMCyd_85_206180) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMcyd_DifAnual_20202050<-raster("Input data/SDMboix_DifAnual_20202050_rcp85.tif")
+crs(SDMcyd_DifAnual_20202050) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+SDMcyd_DifAnual_20502070<-raster("Input data/SDMboix_DifAnual_20502070_rcp85.tif")
+crs(SDMcyd_DifAnual_20502070) <- CRS("+proj=longlat +datum=WGS84 +no_defs ")
+
+FocRisc<-raster("Foc/RiscFocCREAF_1000.tif")
+  crs(FocRisc) <- CRS("+init=epsg:25831")
+
+CydCat<-raster("Input data/CydCat_1000.tif") #Segons alta afectció o no.
+CydCat<-raster("Input data/CydCat_high_1000.tif")
+
+
+#Conversio
+llista<-list(InLa,SDMBoix,SDMBoix_45_204160,SDMBoix_45_206180,SDMBoix_85_204160,SDMBoix_85_206180,
+           SDMCyd,SDMCyd_45_204160,SDMCyd_45_206180,SDMCyd_85_204160,SDMCyd_85_206180,FocRisc,CydCat)
+noms<-c("InLa","SDMBoix","SDMBoix_45_204160","SDMBoix_45_206180","SDMBoix_85_204160","SDMBoix_85_206180",
+       "SDMCyd","SDMCyd_45_204160","SDMCyd_45_206180","SDMCyd_85_204160","SDMCyd_85_206180","FocRisc","CydCat")
+
+llista.out<-list()
+
+for (i in 1:length(noms)){
+  a<-llista[[i]]
+  b<-projectRaster(a,aspect)
+  c<-mask(b,aspect)
+  
+  plot(c,main=noms[i])
+  
+  llista.out[[i]]<-c
+  #writeRaster(c,paste0("Simulation Model/inputfiles/",noms[i],".tif"),format="GTiff", overwrite=TRUE)
+}
+
+
+#Convertir a data frames
+data1<-na.omit(as.data.frame(aspect,xy=T))
+data2<-cbind(data1,extract(aspect,data1[,c(1,2)],cellnumbers=T))
+data2<-data2[,c(4,1,2)]
+
+Habitat.df<-cbind(data2,extract(llista.out[[1]],data2[,c(2,3)]))
+Habitat.df[is.na(Habitat.df)] <- 0
+colnames(Habitat.df)[4]<-"Hab2019"
+write.table(Habitat.df,"Simulation Model/inputfiles/Habitat_df.txt")
+
+LocCyd.df<-cbind(data2,extract(llista.out[[13]],data2[,c(2,3)]))
+LocCyd.df[is.na(LocCyd.df)] <- 0
+LocCyd.df$kk<-0
+LocCyd.df<-LocCyd.df[,c(1,2,3,5,5,5,5,5,5,5,4,4,4)]
+colnames(LocCyd.df)[4:13]<-c("Cyd2010","Cyd2011","Cyd2012","Cyd2013","Cyd2014","Cyd2015","Cyd2016","Cyd2017","Cyd2018","Cyd2019")
+write.table(LocCyd.df,"Simulation Model/inputfiles/LocCyd_df.txt")
+
+FixInp.df<-cbind(data2,extract(stack(llista.out[2:12]),data2[,c(2,3)]))
+FixInp.df[is.na(FixInp.df)] <- 0
+colnames(FixInp.df)[4:14]<-c("SDMbuxus_2020","SDMbuxus_45_204160","SDMbuxus_45_206180","SDMbuxus_85_204160","SDMbuxus_85_206180",
+                             "SDMcyd_2020","SDMcyd_45_204160","SDMcyd_45_206180","SDMcyd_85_204160","SDMcyd_85_206180",
+                             "RiscFoc")
+write.table(FixInp.df,"Simulation Model/inputfiles/FixIn_df.txt")
